@@ -56,16 +56,16 @@ public class FalconPathPlanner
 	public double[][] heading;
 
 	double totalTime;
-	double totalDistance;
-	double numFinalPoints;
+	public double totalDistance;
+	public double numFinalPoints;
 
-	double pathAlpha;
-	double pathBeta;
-	double pathTolerance;
+	public double pathAlpha;
+	public double pathBeta;
+	public double pathTolerance;
 
-	double velocityAlpha;
-	double velocityBeta;
-	double velocityTolerance;
+	public double velocityAlpha;
+	public double velocityBeta;
+	public double velocityTolerance;
 
 
 	/**
@@ -737,12 +737,8 @@ public class FalconPathPlanner
 		//example on printing useful path information
 		//System.out.println(path.numFinalPoints);
 		//System.out.println(path.pathAlpha);
-
-
-
-
 	}
-
+	
 	public void poofExample()
 	{
 		/***Poof Example***/
@@ -832,11 +828,8 @@ public class FalconPathPlanner
 
 		//path heading accumulated in degrees
 		//FalconPathPlanner.print(path.heading);
-
-
-	};
-}	
-
+	}	
+}
 
 
 

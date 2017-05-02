@@ -41,7 +41,7 @@ import javax.swing.*;
  *
  */
  
-class FalconLinePlot extends JPanel implements ClipboardOwner{
+public class FalconLinePlot extends JPanel implements ClipboardOwner{
   
     
 	private static final long serialVersionUID = 3205256608145459434L;
@@ -172,11 +172,11 @@ class FalconLinePlot extends JPanel implements ClipboardOwner{
     	JFrame g = new JFrame("Figure " + count);
         g.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         g.add(this);
-        g.setSize(600,400);
+        g.setSize(700,700);
         g.setLocationByPlatform(true);
         g.setVisible(true);
          
-        menu(g,this);	
+        menu(g,this);
     }
     
     /**
@@ -291,7 +291,7 @@ class FalconLinePlot extends JPanel implements ClipboardOwner{
         
     }
     
-    void setXTic(double lowerBound, double upperBound, double stepSize)
+    public void setXTic(double lowerBound, double upperBound, double stepSize)
     {
     	this.userSetXTic = true;
     	
@@ -742,6 +742,16 @@ class FalconLinePlot extends JPanel implements ClipboardOwner{
 
     	g.addMouseListener(new PopupTriggerListener());
     	
+    	JMenuItem exit = new JMenuItem("Exit");
+    	
+    	exit.addActionListener(new ActionListener() 
+        {
+          public void actionPerformed(ActionEvent e) 
+          {
+            System.exit(ABORT);
+          }
+        });
+    	
     	JMenuItem item = new JMenuItem("Copy Figure");
 
         item.addActionListener(new ActionListener() 
@@ -785,6 +795,8 @@ class FalconLinePlot extends JPanel implements ClipboardOwner{
         });
         
         menu.add(item);
+        
+        menu.add(exit);
     }
 
     class PopupTriggerListener extends MouseAdapter {
@@ -844,31 +856,17 @@ class FalconLinePlot extends JPanel implements ClipboardOwner{
     /******TEST MAIN METHOD*******/
     public static void main(String[] args) {
     	
-  	  double[] data = {
-  		        -235, 14, 18, 03, 60, 150, 74, 87, 54, 77,
-  		        61, 55, 48, 60, 49, 36, 38, 27, 20, 18,5
-  		    };
-  	  
-  	  double[] data2 = {
-		        -4, 124, 128, 33, -1, 1, 74, 87, 54, 77,
-		        61, 55, 48, 60, 40, 36, 38, 27, 20, 18,5
-		    };
-  	  
-  	  double[] test = {0.1, 0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.7, 2.0,
-  			  2.2,2.4,2.6,2.8,3.0,3.2,3.4,3.6,3.8,4.0,4.2
+  	  double[] data3 = {
+  			  0, 15, 20, 25, 30, 100
   	  };
   	
+  	//My Line Plot
+  	FalconLinePlot fig3 = new FalconLinePlot(data3, Color.black, Color.cyan);
+  	
+  	fig3.setTitle("My Plot");
+  	fig3.yGridOn();
   	
   	
-  	FalconLinePlot fig2 = new FalconLinePlot(data,Color.red, Color.blue);
-  	
-  	fig2.yGridOn();
-  	fig2.xGridOn();
-  	fig2.setYLabel("This is a new");
-  	
-  	fig2.addData(data2, Color.blue);
-  	
-  	FalconLinePlot fig1 =  new FalconLinePlot(test,data);
   	
   }
     
