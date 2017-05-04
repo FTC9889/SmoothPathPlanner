@@ -5,58 +5,41 @@ import java.awt.Color;
 import usfirst.frc.team2168.robot.FalconLinePlot;
 import usfirst.frc.team2168.robot.FalconPathPlanner;
 
-public class FTC9889_Blue2BeaconPath {
+public class FTC9889_Blue2BeaconPathCenter {
 
 	public static void main(String[] args) {
+		//TODO Add code generator for path
+		
 		long start = System.currentTimeMillis();
 		
-		double FTCtotalTime = 5; //seconds
+		FalconLinePlot FTC = new FalconLinePlot(new double[][]{{0.0,0.0}});
+		
+		FTC2016_2017Field.make(FTC);
+		
+		double FTCtotalTime = 6; //seconds
 		double FTCtimeStep = 0.1; //period of control loop on Rio, seconds
 		double FTCrobotTrackWidth = 1; //distance between left and right wheels, feet
 		
-		FalconLinePlot FTC = new FalconLinePlot(new double[][]{{0.0,0.0}});
-		FTC.yGridOn();
-		FTC.xGridOn();
-		FTC.setYLabel("Y (feet)");
-		FTC.setXLabel("X (feet)");
-		FTC.setTitle("Top Down View of FTC Field (12ft x 12ft) \n shows global position of robot path, along with left and right wheel trajectories");
-
-		//force graph to show 1/2 field dimensions of 24.8ft x 27 feet
-		double FTCfieldWidth = 12.0;
-		FTC.setXTic(0, FTCfieldWidth, 1);
-		FTC.setYTic(0, FTCfieldWidth, 1);
-		
-		double[][] CenterLine = new double[][] {{0,0},{FTCfieldWidth, FTCfieldWidth}};
-		double[][] redCorner = new double[][] {{0,10}, {2,12},};
-		double[][] blueCorner = new double[][] {{10,0},{12,2},};
-		double[][] centerGoal = new double[][] {{5,5},{7,5},{7,7},{5,7},{5,5},};
-		
-		FTC.addData(CenterLine, Color.black);
-
-		FTC.addData(redCorner, Color.RED);
-		FTC.addData(blueCorner, Color.blue);
-		FTC.addData(centerGoal, Color.BLACK);
-		
 		double[][] FirstftcPath = new double[][]{
-			{9,0.5},
-			{9,3},
-			{11,4},
-			{11.2,4},
-			{11.5,4},
+			{8,0.5},
+			{8,3},
+			{11,5},
+			{11.2,5},
+			{11.5,5},
 		};
 		
 		double[][] SecondftcPath = new double[][]{
-			{11.5,4},
-			{9,4},
+			{11.5,5},
+			{9,5},
 			{9,6},
 			{9,8},
-			{11,10},
-			{11.5,10},
+			{11,9},
+			{11.6,9},
 		};
 		
 		double[][] ThirdftcPath = new double[][]{
-			{11.5,10},
-			{11,10},
+			{11.6,9},
+			{11,9},
 			{7,5.5},
 		};
 		
@@ -88,14 +71,19 @@ public class FTC9889_Blue2BeaconPath {
 		FTC.addData(ThirdFTCPATH.leftPath, Color.magenta);
 		FTC.addData(ThirdFTCPATH.rightPath, Color.magenta);	
 		
-		FalconLinePlot fig2 = new FalconLinePlot(FirstFTCPATH.smoothCenterVelocity,null,Color.blue);
-		fig2.yGridOn();
-		fig2.xGridOn();
-		fig2.setYLabel("Velocity (ft/sec)");
-		fig2.setXLabel("time (seconds)");
-		fig2.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
-		fig2.addData(FirstFTCPATH.smoothRightVelocity, Color.magenta);
-		fig2.addData(FirstFTCPATH.smoothLeftVelocity, Color.cyan);
+		boolean speed = false;
+		
+		//display speeds
+		if(speed){
+			FalconLinePlot fig2 = new FalconLinePlot(FirstFTCPATH.smoothCenterVelocity,null,Color.blue);
+			fig2.yGridOn();
+			fig2.xGridOn();
+			fig2.setYLabel("Velocity (ft/sec)");
+			fig2.setXLabel("time (seconds)");
+			fig2.setTitle("Velocity Profile for Left and Right Wheels \n Left = Cyan, Right = Magenta");
+			fig2.addData(FirstFTCPATH.smoothRightVelocity, Color.magenta);
+			fig2.addData(FirstFTCPATH.smoothLeftVelocity, Color.cyan);
+		}
 		
 		FalconPathPlanner.print(FirstFTCPATH.smoothPath);
 
