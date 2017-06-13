@@ -17,7 +17,7 @@ public class FTC9889_Blue2BeaconPathCenter {
 		FTC2016_2017Field.make(FTC);
 		
 		double FTCtotalTime = 6; //seconds
-		double FTCtimeStep = 0.1; //period of control loop on Rio, seconds
+		double FTCtimeStep = 0.1;
 		double FTCrobotTrackWidth = 1; //distance between left and right wheels, feet
 		
 		double[][] FirstftcPath = new double[][]{
